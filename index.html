@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forever With You - Anniversary 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== UNIVERSAL ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOutDown {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: scale(1); }
+        }
+
+        /* ===== STEP 1: WELCOME PAGE ===== */
+        .step-1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #FFB6D9 0%, #FFD9E8 25%, #E6B3FF 50%, #D9B3FF 75%, #FFB6D9 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .welcome-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .welcome-title {
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 900;
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .welcome-subtitle {
+            font-size: clamp(16px, 4vw, 24px);
+            color: #D9B6FF;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .character-preview {
+            width: clamp(150px, 40vw, 280px);
+            height: clamp(150px, 40vw, 280px);
+            margin: 0 auto 40px;
+            position: relative;
+            animation: float 4s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .character-preview:hover {
+            transform: scale(1.1);
+        }
+
+        .char-frame {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6D9 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3),
+                        inset 0 2px 10px rgba(255, 255, 255, 0.5);
+            border: 4px solid rgba(255, 255, 255, 0.7);
+            position: relative;
+        }
+
+        .char-frame::before {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border: 2px dashed rgba(255, 182, 193, 0.3);
+            border-radius: 50%;
+            animation: spin 8s linear infinite;
+        }
+
+        .char-emoji {
+            font-size: clamp(60px, 15vw, 120px);
+            animation: pulse 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tap-hint {
+            font-size: clamp(12px, 3vw, 16px);
+            color: #FF69B4;
+            margin-top: 30px;
+            font-weight: 700;
+            animation: blink 2s ease-in-out infinite;
+            letter-spacing: 1px;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .float-item {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .item-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .item-2 { top: 20%; right: 15%; animation-delay: 1s; }
+        .item-3 { bottom: 15%; left: 20%; animation-delay: 2s; }
+        .item-4 { bottom: 20%; right: 10%; animation-delay: 1.5s; }
+
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 12px;
+            color: rgba(255, 105, 180, 0.5);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* ===== STEP 2: CAFÉ SCENE ===== */
+        .step-2 {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom, #FFF5F7 0%, #FFE4E8 50%, #F5E6FF 100%);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* Café Background */
+        .cafe-scene {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .cafe-wall {
+            position: absolute;
+            width: 100%;
+            height: 60%;
+            top: 0;
+            background: linear-gradient(135deg, #FFE4D6 0%, #FFF0E6 100%);
+        }
+
+        .cafe-floor {
+            position: absolute;
+            width: 100%;
+            height: 40%;
+            bottom: 0;
+            background: linear-gradient(135deg, #E8D4C4 0%, #D4C4B0 100%);
+        }
+
+        /* Decorative elements */
+        .cafe-decoration {
+            position: absolute;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .deco-1 {
+            top: 5%;
+            right: 5%;
+            font-size: 200px;
+        }
+
+        .deco-2 {
+            bottom: 5%;
+            left: 5%;
+            font-size: 180px;
+        }
+
+        .deco-3 {
+            top: 40%;
+            left: -50px;
+            font-size: 300px;
+            opacity: 0.08;
+        }
+
+        /* Table */
+        .cafe-table {
+            position: absolute;
+            width: 90%;
+            max-width: 900px;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .table-top {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #D4A5A5 0%, #C4959D 50%, #A89494 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 30px 20px;
+            gap: 20px;
+            position: relative;
+        }
+
+        .table-top::before {
+            content: '';
+            position: absolute;
+            width: 95%;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Characters on table */
+        .table-character {
+            width: clamp(80px, 20vw, 120px);
+            height: clamp(100px, 25vw, 150px);
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+        }
+
+        .table-character-tanaz {
+            animation-delay: 0s;
+        }
+
+        .table-character-shabit {
+            animation-delay: 0.5s;
+        }
+
+        .char-sitting {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Sitting character head */
+        .sit-head {
+            width: 70%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15),
+                        inset -2px -2px 5px rgba(0, 0, 0, 0.1),
+                        inset 2px 2px 5px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            position: relative;
+        }
+
+        .sit-head-tanaz {
+            background: linear-gradient(135deg, #FFB6D9 0%, #FF69B4 100%);
+        }
+
+        .sit-head-shabit {
+            background: linear-gradient(135deg, #B3D9FF 0%, #69B4FF 100%);
+        }
+
+        /* Eyes */
+        .char-eyes {
+            display: flex;
+            gap: 45%;
+            position: absolute;
+            top: 30%;
+        }
+
+        .char-eye {
+            width: 15%;
+            aspect-ratio: 1;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: blink 3s ease-in-out infinite;
+        }
+
+        .char-eye:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .char-pupil {
+            width: 60%;
+            aspect-ratio: 1;
+            background: #FF1493;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .char-pupil::after {
+            content: '';
+            position: absolute;
+            width: 40%;
+            aspect-ratio: 1;
+            background: white;
+            border-radius: 50%;
+            top: 20%;
+            left: 25%;
+        }
+
+        .pupil-blue {
+            background: #1E90FF;
+        }
+
+        /* Nose and Mouth */
+        .char-nose {
+            position: absolute;
+            width: 12%;
+            aspect-ratio: 1;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            top: 55%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .char-mouth {
+            position: absolute;
+            width: 35%;
+            height: 20%;
+            bottom: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 2px solid #FF1493;
+            border-top: none;
+            border-radius: 0 0 100% 100%;
+        }
+
+        .mouth-blue {
+            border-color: #1E90FF;
+        }
+
+        /* Body */
+        .sit-body {
+            width: 65%;
+            height: 40%;
+            border-radius: 50% 50% 60% 60%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1),
+                        inset -1px -1px 3px rgba(0, 0, 0, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .sit-body-tanaz {
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6D9 100%);
+        }
+
+        .sit-body-shabit {
+            background: linear-gradient(135deg, #D9E8FF 0%, #B3D9FF 100%);
+        }
+
+        /* Speech bubbles */
+        .chat-bubble {
+            position: absolute;
+            background: white;
+            border-radius: 15px;
+            padding: 10px 15px;
+            font-size: clamp(10px, 2.5vw, 13px);
+            font-weight: 700;
+            max-width: 120px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            top: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 3s ease-in-out infinite;
+            line-height: 1.3;
+            word-break: break-word;
+            white-space: normal;
+        }
+
+        .bubble-tanaz {
+            color: #FF69B4;
+        }
+
+        .bubble-shabit {
+            color: #1E90FF;
+        }
+
+        /* Floating tea emojis around table */
+        .floating-props {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .prop {
+            position: absolute;
+            font-size: clamp(20px, 5vw, 40px);
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        .prop-1 { top: 0%; left: 5%; animation-delay: 0s; }
+        .prop-2 { top: 5%; right: 8%; animation-delay: 1s; }
+        .prop-3 { bottom: 20%; left: 3%; animation-delay: 1.5s; }
+        .prop-4 { bottom: 15%; right: 5%; animation-delay: 2s; }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 20px;
+        }
+
+        /* ===== STEP 3: LETTER PAGE ===== */
+        .step-3 {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #FFB6D9 0%, #FFD9E8 25%, #E6B3FF 50%, #D9B3FF 75%, #FFB6D9 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 30px 20px;
+            cursor: pointer;
+        }
+
+        .step-3::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .step-3::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .step-3::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #FFB6D9 0%, #FF69B4 100%);
+            border-radius: 10px;
+        }
+
+        .letter-section {
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .letter-card {
+            background: linear-gradient(135deg, #FFFBFE 0%, #FFFFFF 100%);
+            border-radius: 25px;
+            padding: clamp(20px, 5vw, 50px);
+            box-shadow: 0 30px 70px rgba(255, 105, 180, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 3px solid rgba(255, 182, 193, 0.25);
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .letter-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .letter-date {
+            font-size: 12px;
+            color: #D9B6FF;
+            margin-bottom: 15px;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .letter-greeting {
+            font-size: clamp(18px, 4vw, 26px);
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .letter-body {
+            color: #5A5A7A;
+            font-size: clamp(13px, 3vw, 15px);
+            line-height: 1.8;
+            text-align: justify;
+            font-weight: 500;
+        }
+
+        .letter-body p {
+            margin-bottom: 15px;
+        }
+
+        .letter-closing {
+            margin-top: 25px;
+            color: #FF69B4;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .letter-signature {
+            margin-top: 10px;
+            font-size: 28px;
+            text-align: right;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Anniversary celebration */
+        .anniversary-section {
+            background: linear-gradient(135deg, #FFFBFE 0%, #FFFFFF 100%);
+            border-radius: 25px;
+            padding: clamp(25px, 5vw, 50px);
+            box-shadow: 0 30px 70px rgba(255, 105, 180, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 3px solid rgba(255, 182, 193, 0.25);
+            text-align: center;
+            position: relative;
+            animation: fadeInUp 1.2s ease-out 0.3s both;
+        }
+
+        .anniversary-section::before {
+            content: '🎉';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .anniversary-title {
+            font-size: clamp(28px, 6vw, 44px);
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hearts-line {
+            font-size: clamp(30px, 7vw, 50px);
+            margin: 20px 0;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .time-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stat {
+            background: linear-gradient(135deg, #FFB6D9 0%, #FF69B4 100%);
+            padding: clamp(15px, 4vw, 20px);
+            border-radius: 12px;
+            color: white;
+            font-weight: 800;
+            font-size: clamp(12px, 2.5vw, 14px);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+            animation: slideInUp 0.8s ease-out backwards;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat:nth-child(1) { animation-delay: 0.1s; }
+        .stat:nth-child(2) { animation-delay: 0.2s; }
+        .stat:nth-child(3) { animation-delay: 0.3s; }
+        .stat:nth-child(4) { animation-delay: 0.4s; }
+        .stat:nth-child(5) { animation-delay: 0.5s; }
+        .stat:nth-child(6) { animation-delay: 0.6s; }
+        .stat:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.5);
+        }
+
+        .closing-msg {
+            font-size: clamp(14px, 3vw, 18px);
+            color: #5A5A7A;
+            font-weight: 700;
+            margin: 25px 0;
+            line-height: 1.6;
+        }
+
+        .restart-button {
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            color: white;
+            border: none;
+            padding: clamp(12px, 3vw, 18px) clamp(30px, 8vw, 50px);
+            font-size: clamp(13px, 3vw, 16px);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 800;
+            box-shadow: 0 12px 30px rgba(255, 20, 147, 0.35);
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin-top: 25px;
+            animation: fadeInUp 1.2s ease-out 0.6s both;
+        }
+
+        .restart-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: 0.3s;
+        }
+
+        .restart-button:hover::before {
+            left: 100%;
+        }
+
+        .restart-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 40px rgba(255, 20, 147, 0.5);
+        }
+
+        .restart-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Step indicator */
+        .step-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #FFB6D9 0%, #FF69B4 100%);
+            width: clamp(50px, 10vw, 70px);
+            height: clamp(50px, 10vw, 70px);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 900;
+            color: white;
+            font-size: clamp(20px, 5vw, 28px);
+            box-shadow: 0 12px 30px rgba(255, 105, 180, 0.35);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            animation: float 3s ease-in-out infinite;
+            z-index: 100;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .table-top {
+                gap: 10px;
+                padding: 20px 10px;
+                height: 280px;
+            }
+
+            .chat-bubble {
+                max-width: 100px;
+                font-size: 11px;
+            }
+
+            .float-item {
+                font-size: 30px;
+            }
+
+            .welcome-title {
+                margin-bottom: 15px;
+            }
+
+            .letter-card, .anniversary-section {
+                padding: 20px;
+                border-radius: 20px;
+            }
+
+            .time-stats {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                gap: 10px;
+            }
+
+            .stat {
+                padding: 12px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-content {
+                padding: 0 20px;
+            }
+
+            .table-top {
+                flex-direction: column;
+                gap: 5px;
+                height: auto;
+                padding: 15px;
+            }
+
+            .table-character {
+                width: 70px;
+                height: 90px;
+            }
+
+            .chat-bubble {
+                max-width: 90px;
+                font-size: 10px;
+                top: -60px;
+            }
+
+            .letter-card, .anniversary-section {
+                padding: 15px;
+                margin-bottom: 25px;
+            }
+
+            .letter-greeting {
+                font-size: 18px;
+            }
+
+            .anniversary-title {
+                font-size: 24px;
+            }
+
+            .time-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .stat {
+                padding: 10px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- STEP 1: WELCOME -->
+<div class="step-1" id="step1" onclick="nextStep()">
+    <div class="step-badge">1/3</div>
+
+    <div class="floating-elements">
+        <div class="float-item item-1">💕</div>
+        <div class="float-item item-2">🌸</div>
+        <div class="float-item item-3">💕</div>
+        <div class="float-item item-4">🌺</div>
+    </div>
+
+    <div class="welcome-content">
+        <h1 class="welcome-title">A Year With You 💕</h1>
+        <p class="welcome-subtitle">Click to begin your special story</p>
+        
+        <div class="character-preview">
+            <div class="char-frame">
+                <div class="char-emoji">🎁</div>
+            </div>
+        </div>
+
+        <p class="tap-hint">✨ TAP TO CONTINUE ✨</p>
+    </div>
+
+    <div class="watermark">Made by Shabit ✨</div>
+</div>
+
+<!-- STEP 2: CAFÉ SCENE -->
+<div class="step-2" id="step2" onclick="nextStep()">
+    <div class="step-badge">2/3</div>
+
+    <div class="cafe-scene">
+        <div class="cafe-wall"></div>
+        <div class="cafe-floor"></div>
+
+        <div class="cafe-decoration deco-1">☕</div>
+        <div class="cafe-decoration deco-2">🍰</div>
+        <div class="cafe-decoration deco-3">🌸</div>
+
+        <div class="floating-props">
+            <div class="prop prop-1">☕</div>
+            <div class="prop prop-2">🍰</div>
+            <div class="prop prop-3">✨</div>
+            <div class="prop prop-4">💕</div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="cafe-table">
+            <div class="table-character table-character-tanaz">
+                <div class="chat-bubble bubble-tanaz" id="speech-tanaz">I got teaaa 💕</div>
+                <div class="char-sitting">
+                    <div class="sit-head sit-head-tanaz">
+                        <div class="char-eyes">
+                            <div class="char-eye">
+                                <div class="char-pupil"></div>
+                            </div>
+                            <div class="char-eye">
+                                <div class="char-pupil"></div>
+                            </div>
+                        </div>
+                        <div class="char-nose"></div>
+                        <div class="char-mouth"></div>
+                    </div>
+                    <div class="sit-body sit-body-tanaz"></div>
+                </div>
+            </div>
+
+            <div class="table-character table-character-shabit">
+                <div class="chat-bubble bubble-shabit" id="speech-shabit">Tell meee Gurlll 💙</div>
+                <div class="char-sitting">
+                    <div class="sit-head sit-head-shabit">
+                        <div class="char-eyes">
+                            <div class="char-eye">
+                                <div class="char-pupil pupil-blue"></div>
+                            </div>
+                            <div class="char-eye">
+                                <div class="char-pupil pupil-blue"></div>
+                            </div>
+                        </div>
+                        <div class="char-nose"></div>
+                        <div class="char-mouth mouth-blue"></div>
+                    </div>
+                    <div class="sit-body sit-body-shabit"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- STEP 3: LETTER & ANNIVERSARY -->
+<div class="step-3" id="step3">
+    <div class="step-badge">3/3</div>
+
+    <div class="letter-section">
+        <div class="letter-card">
+            <div class="letter-date">April 2, 2026</div>
+            <div class="letter-greeting">My Dearest Tanaz,</div>
+
+            <div class="letter-body">
+                <p>The day i met you, i didnt think much of it. I had no idea that little by little you'd become someone so important to me. Somehow without realizing how we grow closer every day until you werent just my best friend but my sister my family.</p>
+
+                <p>We talked for hours and never got tired of it. We played games, shared secrets, laughed about the smallest things and built something that genuinely mattered to me. Those moments still live in my heart, and I cherish every single one.</p>
+
+                <p>But i made mistakes, mistakes that u cant erase, no matter how much i wish i could. And i regret them deeply. If i could go back in time i would stop myself from ever hurting what we had. Please forgive me for everything i did in the past.</p>
+
+                <p>I know i cant change whats already done and i foolishly thought i could everything in the present without realizing the past shapes it too. I miss the old days more than i can explain. I really love our friendship Tanaz.</p>
+
+                <p>Thank you for being the most incredible part of my life. 💕</p>
+            </div>
+
+            <div class="letter-closing">
+                Forever yours,
+            </div>
+            <div class="letter-signature">Shabit 💗</div>
+        </div>
+
+        <div class="anniversary-section">
+            <h2 class="anniversary-title">🎉 1 Year Anniversary 🎉</h2>
+            <div class="hearts-line">💕 💗 💖</div>
+
+            <p class="closing-msg">
+                I really want to thank you for staying with me for
+            </p>
+
+            <div class="time-stats">
+                <div class="stat">1 Year</div>
+                <div class="stat">12 Months</div>
+                <div class="stat">52 Weeks</div>
+                <div class="stat">365 Days</div>
+                <div class="stat">8,760 Hours</div>
+                <div class="stat">525,600 Minutes</div>
+                <div class="stat">31,536,000 Seconds</div>
+            </div>
+
+            <p class="closing-msg">
+                Of pure love, laughter, and unforgettable memories with you. Thank you for being my best friend, my sister, my family. 💕
+            </p>
+
+            <button class="restart-button" onclick="restartSteps()">Start Again ↻</button>
+        </div>
+    </div>
+
+    <div class="watermark">Made by Shabit ✨</div>
+</div>
+
+<script>
+    let currentStep = 1;
+
+    // Dialogue for Tanaz
+    const tanazLines = [
+        "I got teaaa 💕",
+        "Sybau i know your gay",
+        "Bleh"
+    ];
+
+    // Dialogue for Shabit
+    const shabitLines = [
+        "Tell meee Gurlll 💙",
+        "No i am nott",
+        "Atleast i Can play chess"
+    ];
+
+    let tanazIndex = 0;
+    let shabitIndex = 0;
+
+    function changeDialogue() {
+        document.getElementById('speech-tanaz').textContent = tanazLines[tanazIndex];
+        document.getElementById('speech-shabit').textContent = shabitLines[shabitIndex];
+        
+        tanazIndex = (tanazIndex + 1) % tanazLines.length;
+        shabitIndex = (shabitIndex + 1) % shabitLines.length;
+    }
+
+    let dialogueInterval;
+
+    function nextStep() {
+        if (currentStep === 1) {
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+            currentStep = 2;
+            
+            dialogueInterval = setInterval(changeDialogue, 1000);
+        } else if (currentStep === 2) {
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step3').style.display = 'block';
+            currentStep = 3;
+            
+            clearInterval(dialogueInterval);
+        }
+    }
+
+    function restartSteps() {
+        document.getElementById('step1').style.display = 'flex';
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('step3').style.display = 'none';
+        currentStep = 1;
+        clearInterval(dialogueInterval);
+        tanazIndex = 0;
+        shabitIndex = 0;
+        window.scrollTo(0, 0);
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            if (currentStep < 3) {
+                nextStep();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
