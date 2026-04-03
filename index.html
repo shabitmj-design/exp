@@ -114,15 +114,38 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100px); opacity: 0; }
+        @keyframes attackSlash {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(-20deg) scale(1.2); }
+            100% { transform: rotate(0deg) scale(1); }
         }
 
-        @keyframes criticalHit {
+        @keyframes shieldBounce {
             0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.15); }
             100% { transform: scale(1); }
+        }
+
+        @keyframes healGlow {
+            0% { box-shadow: 0 0 0px rgba(0, 255, 0, 0); }
+            50% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.8); }
+            100% { box-shadow: 0 0 0px rgba(0, 255, 0, 0); }
+        }
+
+        @keyframes moveLeft {
+            to { transform: translateX(-30px); }
+        }
+
+        @keyframes moveRight {
+            to { transform: translateX(30px); }
+        }
+
+        @keyframes moveUp {
+            to { transform: translateY(-30px); }
+        }
+
+        @keyframes moveDown {
+            to { transform: translateY(30px); }
         }
 
         /* ===== STEP 1: MAGICAL ENTRY ===== */
@@ -222,14 +245,6 @@
             animation: pulseRing 2s infinite;
         }
 
-        .hello-kitty {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 15px 40px rgba(255, 105, 180, 0.25));
-            animation: float 3s ease-in-out infinite;
-        }
-
         .speech-bubble {
             position: absolute;
             background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F7 100%);
@@ -319,6 +334,172 @@
             animation: fadeInUp 1.5s ease-out 0.8s both;
         }
 
+        /* CARTOON CHARACTER */
+        .cartoon-character {
+            width: 180px;
+            height: 200px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .char-body {
+            position: absolute;
+            width: 120px;
+            height: 140px;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6D9 100%);
+            border-radius: 50% 50% 45% 45%;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2),
+                        inset -3px -3px 10px rgba(255, 105, 180, 0.1),
+                        inset 3px 3px 10px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .char-body.blue {
+            background: linear-gradient(135deg, #D9E8FF 0%, #B3D9FF 100%);
+        }
+
+        .char-head {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6D9 100%);
+            border-radius: 50%;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2),
+                        inset -2px -2px 8px rgba(255, 105, 180, 0.1),
+                        inset 2px 2px 8px rgba(255, 255, 255, 0.35);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            z-index: 5;
+        }
+
+        .char-head.blue {
+            background: linear-gradient(135deg, #D9E8FF 0%, #B3D9FF 100%);
+        }
+
+        .eyes {
+            display: flex;
+            gap: 20px;
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .eye {
+            width: 20px;
+            height: 25px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pupil {
+            width: 12px;
+            height: 15px;
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            border-radius: 50%;
+        }
+
+        .pupil::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 3px;
+        }
+
+        .pupil.blue {
+            background: linear-gradient(135deg, #69B4FF 0%, #1E90FF 100%);
+        }
+
+        .eye.blink {
+            animation: blink 2.5s ease-in-out infinite;
+        }
+
+        .nose {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #FFB6D9 0%, #FF69B4 100%);
+            border-radius: 50%;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .ears {
+            position: absolute;
+            width: 28px;
+            height: 35px;
+            background: linear-gradient(135deg, #FFB6D9 0%, #FF69B4 100%);
+            border-radius: 50%;
+            top: -15px;
+            box-shadow: inset 0 0 8px rgba(255, 105, 180, 0.3);
+        }
+
+        .ears.blue {
+            background: linear-gradient(135deg, #B3D9FF 0%, #69B4FF 100%);
+        }
+
+        .ear-left {
+            left: 15px;
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        .ear-right {
+            right: 15px;
+            animation: wave 2s ease-in-out infinite 0.3s;
+        }
+
+        .ears::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .arms {
+            position: absolute;
+            width: 22px;
+            height: 60px;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6D9 100%);
+            border-radius: 25px;
+            top: 50px;
+            box-shadow: 0 3px 10px rgba(255, 105, 180, 0.15);
+        }
+
+        .arms.blue {
+            background: linear-gradient(135deg, #D9E8FF 0%, #B3D9FF 100%);
+        }
+
+        .arm-left {
+            left: 10px;
+            animation: wave 1.5s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        .arm-right {
+            right: 10px;
+            animation: wave 1.5s ease-in-out infinite 0.2s reverse;
+            transform-origin: top center;
+        }
+
         /* ===== STEP 2: LOVE LETTER ===== */
         .step-2 {
             display: none;
@@ -395,258 +576,27 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            height: 400px;
-            gap: 10px;
+            height: 300px;
+            gap: 30px;
         }
 
-        .character-sitting {
-            width: 160px;
-            height: 220px;
+        .character-wrapper {
             position: relative;
             animation: float 3s ease-in-out infinite;
         }
 
-        .char-sit-tanaz {
-            animation-delay: 0s;
-        }
-
-        .char-sit-shabit {
-            animation-delay: 0.5s;
-        }
-
-        .char-sit-body {
-            position: absolute;
-            width: 120px;
-            height: 130px;
-            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6D9 50%, #FFB6D9 100%);
-            border-radius: 40px 40px 50px 50px;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2),
-                        inset -3px -3px 10px rgba(255, 105, 180, 0.1),
-                        inset 3px 3px 10px rgba(255, 255, 255, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-        }
-
-        .sit-body-shabit {
-            background: linear-gradient(135deg, #D9E8FF 0%, #B3D9FF 50%, #B3D9FF 100%);
-        }
-
-        .char-sit-head {
-            position: absolute;
-            width: 110px;
-            height: 110px;
-            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6D9 100%);
-            border-radius: 50%;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2),
-                        inset -2px -2px 8px rgba(255, 105, 180, 0.1),
-                        inset 2px 2px 8px rgba(255, 255, 255, 0.35);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .sit-head-shabit {
-            background: linear-gradient(135deg, #D9E8FF 0%, #B3D9FF 100%);
-        }
-
-        .sit-eyes {
-            display: flex;
-            gap: 25px;
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .sit-eye {
-            width: 25px;
-            height: 32px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .sit-pupil {
-            width: 16px;
-            height: 22px;
-            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
-            border-radius: 50%;
-            position: relative;
-        }
-
-        .sit-pupil::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-            top: 3px;
-            left: 5px;
-        }
-
-        .sit-pupil-blue {
-            background: linear-gradient(135deg, #69B4FF 0%, #1E90FF 100%);
-        }
-
-        .sit-eye-left { animation: blink 2s ease-in-out infinite; }
-        .sit-eye-right { animation: blink 2s ease-in-out infinite 0.1s; }
-
-        .sit-nose {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 50%;
-            top: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .sit-mouth {
-            position: absolute;
-            width: 38px;
-            height: 22px;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .sit-mouth-smile {
-            width: 100%;
-            height: 100%;
-            border: 3px solid #FF1493;
-            border-top: none;
-            border-radius: 0 0 40px 40px;
-            position: relative;
-        }
-
-        .sit-mouth-smile-blue {
-            border-color: #1E90FF;
-        }
-
-        .sit-tongue {
-            position: absolute;
-            width: 18px;
-            height: 10px;
-            background: linear-gradient(135deg, #FF69B4 0%, #FFB6D9 100%);
-            border-radius: 0 0 12px 12px;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .sit-ear {
-            position: absolute;
-            width: 32px;
-            height: 38px;
-            background: linear-gradient(135deg, #FFB6D9 0%, #FF69B4 100%);
-            border-radius: 50%;
-            top: -5px;
-            box-shadow: inset 0 0 8px rgba(255, 105, 180, 0.3),
-                        0 3px 10px rgba(255, 105, 180, 0.2);
-        }
-
-        .sit-ear-blue {
-            background: linear-gradient(135deg, #B3D9FF 0%, #69B4FF 100%);
-        }
-
-        .sit-ear-left {
-            left: 10px;
-            animation: wave 2s ease-in-out infinite;
-        }
-
-        .sit-ear-right {
-            right: 10px;
-            animation: wave 2s ease-in-out infinite 0.3s;
-        }
-
-        .sit-ear::after {
-            content: '';
-            position: absolute;
-            width: 15px;
-            height: 18px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .sit-arm {
-            position: absolute;
-            width: 28px;
-            height: 70px;
-            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6D9 100%);
-            border-radius: 30px;
-            top: 95px;
-            box-shadow: 0 3px 10px rgba(255, 105, 180, 0.15),
-                        inset -1px 0 3px rgba(255, 105, 180, 0.1);
-        }
-
-        .sit-arm-blue {
-            background: linear-gradient(135deg, #D9E8FF 0%, #B3D9FF 100%);
-        }
-
-        .sit-arm-left {
-            left: -15px;
-            animation: wave 1.5s ease-in-out infinite;
-            transform-origin: top center;
-        }
-
-        .sit-arm-right {
-            right: -15px;
-            animation: wave 1.5s ease-in-out infinite 0.2s reverse;
-            transform-origin: top center;
-        }
-
         .char-name {
             position: absolute;
-            top: -25px;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 12px;
             font-weight: 800;
             letter-spacing: 1px;
-        }
-
-        .name-tanaz {
             color: #FF69B4;
         }
 
-        .name-shabit {
-            color: #1E90FF;
-        }
-
-        .sit-speech {
-            position: absolute;
-            background: white;
-            border-radius: 12px;
-            padding: 8px 12px;
-            font-size: 11px;
-            font-weight: 700;
-            color: #FF69B4;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
-            white-space: normal;
-            max-width: 95px;
-            text-align: center;
-            border: 2px solid rgba(255, 182, 193, 0.3);
-            top: -70px;
-            animation: float 3s ease-in-out infinite;
-            line-height: 1.2;
-        }
-
-        .sit-speech-shabit {
+        .char-name.blue {
             color: #1E90FF;
         }
 
@@ -662,7 +612,7 @@
                         inset 0 1px 0 rgba(255, 255, 255, 0.8);
             position: relative;
             border-left: 6px solid #FFB6D9;
-            min-height: 500px;
+            min-height: 400px;
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: #FFB6D9 transparent;
@@ -704,7 +654,7 @@
 
         .letter-body {
             color: #5A5A7A;
-            font-size: 15px;
+            font-size: 14px;
             line-height: 1.8;
             text-align: justify;
             font-weight: 500;
@@ -1018,7 +968,6 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             padding: 20px;
             position: relative;
             z-index: 1;
@@ -1048,6 +997,7 @@
             display: flex;
             gap: 50px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .character-stat {
@@ -1097,65 +1047,129 @@
             border: 2px solid rgba(255, 107, 157, 0.5);
             border-radius: 10px;
             margin-bottom: 20px;
+            overflow: hidden;
         }
 
-        .character {
+        .game-character {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
-        .character-sprite {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #FFB6D9 0%, #FF69B4 100%);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 80px;
-            box-shadow: 0 0 30px rgba(255, 107, 157, 0.6);
-            border: 3px solid rgba(255, 255, 255, 0.5);
+        .game-character-sprite {
+            position: relative;
             animation: float 3s ease-in-out infinite;
         }
 
-        .character-sprite.damaged {
-            animation: damageFlash 0.5s ease-in-out;
+        .game-character-sprite.attacking {
+            animation: attackSlash 0.4s ease-in-out;
         }
 
-        .boss-sprite {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, #ff4757 0%, #2f3542 100%);
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 100px;
-            box-shadow: 0 0 40px rgba(255, 71, 87, 0.8);
-            border: 4px solid #ff4757;
-            position: relative;
+        .game-character-sprite.defending {
+            animation: shieldBounce 0.4s ease-in-out;
         }
 
-        .boss-sprite.damaged {
-            animation: shake 0.4s ease-in-out;
+        .game-character-sprite.healing {
+            animation: healGlow 0.6s ease-in-out;
         }
 
-        .character-name {
+        .game-character-name {
             color: white;
             font-weight: bold;
             text-align: center;
             font-size: 14px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 15px;
+            border-radius: 10px;
         }
 
-        .damage-number {
+        .shield {
             position: absolute;
-            color: #ff4757;
+            width: 140px;
+            height: 140px;
+            border: 3px solid #4169E1;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            animation: shieldBounce 0.4s ease-in-out;
+            box-shadow: 0 0 20px rgba(65, 105, 225, 0.8);
+        }
+
+        .shield.hidden {
+            display: none;
+        }
+
+        .demon-boss {
+            position: relative;
+            width: 160px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 120px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .demon-boss.damaged {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        .demon-boss.defending {
+            animation: shieldBounce 0.4s ease-in-out;
+        }
+
+        .demon-shield {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border: 3px solid #ff4757;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
+        }
+
+        .demon-shield.hidden {
+            display: none;
+        }
+
+        .movement-controls {
+            display: grid;
+            grid-template-columns: repeat(3, 60px);
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            width: fit-content;
+            margin: 0 auto 20px;
+        }
+
+        .move-btn {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: 2px solid white;
+            border-radius: 8px;
+            cursor: pointer;
             font-weight: bold;
-            font-size: 24px;
-            animation: slideIn 0.8s ease-out forwards;
-            pointer-events: none;
+            font-size: 20px;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+        }
+
+        .move-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(102, 126, 234, 0.8);
+        }
+
+        .move-btn:active {
+            transform: scale(0.95);
         }
 
         .game-controls {
@@ -1211,7 +1225,7 @@
             border: 2px solid rgba(255, 107, 157, 0.5);
             border-radius: 10px;
             padding: 15px;
-            max-height: 150px;
+            max-height: 120px;
             overflow-y: auto;
             color: white;
             font-size: 13px;
@@ -1335,31 +1349,24 @@
         }
 
         @media (max-width: 768px) {
-            .page-wrapper {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
             .game-arena {
                 flex-direction: column;
                 gap: 30px;
             }
 
-            .character-sprite {
-                width: 100px;
-                height: 100px;
-                font-size: 60px;
-            }
-
-            .boss-sprite {
-                width: 120px;
-                height: 120px;
-                font-size: 80px;
-            }
-
             .control-btn {
                 padding: 10px 20px;
                 font-size: 12px;
+            }
+
+            .movement-controls {
+                grid-template-columns: repeat(3, 50px);
+            }
+
+            .move-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
             }
         }
     </style>
@@ -1388,7 +1395,25 @@
             <div class="speech-bubble">
                 <div class="speech-text">Hey Tanaz, Shabit wants you to click on me! 💕</div>
             </div>
-            <img src="https://i.imgur.com/5cX1QyP.png" class="hello-kitty" alt="Hello Kitty">
+            <div class="cartoon-character">
+                <div class="char-head">
+                    <div class="ears ear-left"></div>
+                    <div class="ears ear-right"></div>
+                    <div class="eyes">
+                        <div class="eye blink">
+                            <div class="pupil"></div>
+                        </div>
+                        <div class="eye blink">
+                            <div class="pupil"></div>
+                        </div>
+                    </div>
+                    <div class="nose"></div>
+                </div>
+                <div class="char-body">
+                    <div class="arms arm-left"></div>
+                    <div class="arms arm-right"></div>
+                </div>
+            </div>
         </div>
         <div class="entry-text">Hey Tanaz, Shabit wants you to click on me</div>
         <div class="entry-subtext">Begin your special journey 💕</div>
@@ -1413,65 +1438,49 @@
 
     <div class="page-wrapper">
         <div class="illustration-side">
-            <div class="character-sitting char-sit-tanaz">
-                <div class="char-name name-tanaz">TANAZ 💕</div>
-                <div class="sit-speech" id="speech-tanaz">I got teaaa</div>
-                <div class="char-sit-head">
-                    <div class="sit-ear sit-ear-left"></div>
-                    <div class="sit-ear sit-ear-right"></div>
-                    
-                    <div class="sit-eyes">
-                        <div class="sit-eye sit-eye-left">
-                            <div class="sit-pupil"></div>
+            <div class="character-wrapper">
+                <div class="char-name">TANAZ 💕</div>
+                <div class="cartoon-character">
+                    <div class="char-head">
+                        <div class="ears ear-left"></div>
+                        <div class="ears ear-right"></div>
+                        <div class="eyes">
+                            <div class="eye blink">
+                                <div class="pupil"></div>
+                            </div>
+                            <div class="eye blink">
+                                <div class="pupil"></div>
+                            </div>
                         </div>
-                        <div class="sit-eye sit-eye-right">
-                            <div class="sit-pupil"></div>
-                        </div>
+                        <div class="nose"></div>
                     </div>
-
-                    <div class="sit-nose"></div>
-
-                    <div class="sit-mouth">
-                        <div class="sit-mouth-smile">
-                            <div class="sit-tongue"></div>
-                        </div>
+                    <div class="char-body">
+                        <div class="arms arm-left"></div>
+                        <div class="arms arm-right"></div>
                     </div>
-                </div>
-
-                <div class="char-sit-body">
-                    <div class="sit-arm sit-arm-left"></div>
-                    <div class="sit-arm sit-arm-right"></div>
                 </div>
             </div>
 
-            <div class="character-sitting char-sit-shabit">
-                <div class="char-name name-shabit">SHABIT 💙</div>
-                <div class="sit-speech sit-speech-shabit" id="speech-shabit">Tell meee Gurlll</div>
-                <div class="char-sit-head sit-head-shabit">
-                    <div class="sit-ear sit-ear-left sit-ear-blue"></div>
-                    <div class="sit-ear sit-ear-right sit-ear-blue"></div>
-                    
-                    <div class="sit-eyes">
-                        <div class="sit-eye sit-eye-left">
-                            <div class="sit-pupil sit-pupil-blue"></div>
+            <div class="character-wrapper">
+                <div class="char-name blue">SHABIT 💙</div>
+                <div class="cartoon-character">
+                    <div class="char-head blue">
+                        <div class="ears ear-left blue"></div>
+                        <div class="ears ear-right blue"></div>
+                        <div class="eyes">
+                            <div class="eye blink">
+                                <div class="pupil blue"></div>
+                            </div>
+                            <div class="eye blink">
+                                <div class="pupil blue"></div>
+                            </div>
                         </div>
-                        <div class="sit-eye sit-eye-right">
-                            <div class="sit-pupil sit-pupil-blue"></div>
-                        </div>
+                        <div class="nose"></div>
                     </div>
-
-                    <div class="sit-nose"></div>
-
-                    <div class="sit-mouth">
-                        <div class="sit-mouth-smile sit-mouth-smile-blue">
-                            <div class="sit-tongue"></div>
-                        </div>
+                    <div class="char-body blue">
+                        <div class="arms arm-left blue"></div>
+                        <div class="arms arm-right blue"></div>
                     </div>
-                </div>
-
-                <div class="char-sit-body sit-body-shabit">
-                    <div class="sit-arm sit-arm-left sit-arm-blue"></div>
-                    <div class="sit-arm sit-arm-right sit-arm-blue"></div>
                 </div>
             </div>
         </div>
@@ -1556,7 +1565,7 @@
 <!-- STEP 4: BOSS GAME -->
 <div class="step-4" id="step4">
     <div class="shabit-dialogue" id="shabitDialogue">
-        Yo let's do this! 🔥
+        Let's do this! 🔥
     </div>
 
     <div class="game-container">
@@ -1564,7 +1573,7 @@
             <div class="game-title">⚔️ BATTLE TANZIM ⚔️</div>
             <div class="player-info">
                 <div class="character-stat">
-                    <span>🧬 TANAZ HP:</span>
+                    <span>🧸 TANAZ HP:</span>
                     <div class="health-bar">
                         <div class="health-fill" id="tanazHealthFill"></div>
                         <div class="health-text" id="tanazHealthText">100/100</div>
@@ -1574,20 +1583,88 @@
                     <span>👹 TANZIM HP:</span>
                     <div class="health-bar">
                         <div class="health-fill" id="tanzimHealthFill"></div>
-                        <div class="health-text" id="tanzimHealthText">200/200</div>
+                        <div class="health-text" id="tanzimHealthText">800/800</div>
+                    </div>
+                </div>
+                <div class="character-stat">
+                    <span>💙 SHABIT HP:</span>
+                    <div class="health-bar">
+                        <div class="health-fill" id="shabitHealthFill"></div>
+                        <div class="health-text" id="shabitHealthText">150/150</div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="movement-controls">
+            <div></div>
+            <button class="move-btn" onclick="moveCharacter('up')">↑</button>
+            <div></div>
+            <button class="move-btn" onclick="moveCharacter('left')">←</button>
+            <button class="move-btn" onclick="moveCharacter('neutral')">●</button>
+            <button class="move-btn" onclick="moveCharacter('right')">→</button>
+            <div></div>
+            <button class="move-btn" onclick="moveCharacter('down')">↓</button>
+            <div></div>
+        </div>
+
         <div class="game-arena">
-            <div class="character">
-                <div class="character-sprite" id="tanazSprite">🧸</div>
-                <div class="character-name">TANAZ</div>
+            <div class="game-character">
+                <div class="game-character-sprite" id="tanazSprite">
+                    <div class="cartoon-character">
+                        <div class="char-head">
+                            <div class="ears ear-left"></div>
+                            <div class="ears ear-right"></div>
+                            <div class="eyes">
+                                <div class="eye blink">
+                                    <div class="pupil"></div>
+                                </div>
+                                <div class="eye blink">
+                                    <div class="pupil"></div>
+                                </div>
+                            </div>
+                            <div class="nose"></div>
+                        </div>
+                        <div class="char-body">
+                            <div class="arms arm-left"></div>
+                            <div class="arms arm-right"></div>
+                        </div>
+                    </div>
+                    <div class="shield hidden" id="tanazShield">🛡️</div>
+                </div>
+                <div class="game-character-name">TANAZ</div>
             </div>
-            <div class="character">
-                <div class="boss-sprite" id="tanzimSprite">👹</div>
-                <div class="character-name">TANZIM (Boss)</div>
+
+            <div class="game-character">
+                <div class="game-character-sprite" id="shabitSprite">
+                    <div class="cartoon-character">
+                        <div class="char-head blue">
+                            <div class="ears ear-left blue"></div>
+                            <div class="ears ear-right blue"></div>
+                            <div class="eyes">
+                                <div class="eye blink">
+                                    <div class="pupil blue"></div>
+                                </div>
+                                <div class="eye blink">
+                                    <div class="pupil blue"></div>
+                                </div>
+                            </div>
+                            <div class="nose"></div>
+                        </div>
+                        <div class="char-body blue">
+                            <div class="arms arm-left blue"></div>
+                            <div class="arms arm-right blue"></div>
+                        </div>
+                    </div>
+                    <div class="shield hidden" id="shabitShield">🛡️</div>
+                </div>
+                <div class="game-character-name">SHABIT (AI)</div>
+            </div>
+
+            <div class="game-character">
+                <div class="demon-boss" id="demoBoss">👹</div>
+                <div class="demon-shield hidden" id="demonShield">🛡️</div>
+                <div class="game-character-name">TANZIM</div>
             </div>
         </div>
 
@@ -1634,11 +1711,7 @@
     let shabitIndex = 0;
 
     function changeDialogue() {
-        document.getElementById('speech-tanaz').textContent = tanazLines[tanazIndex];
-        document.getElementById('speech-shabit').textContent = shabitLines[shabitIndex];
-        
-        tanazIndex = (tanazIndex + 1) % tanazLines.length;
-        shabitIndex = (shabitIndex + 1) % shabitLines.length;
+        // Dialogue only in step 2
     }
 
     let dialogueInterval;
@@ -1648,12 +1721,10 @@
             document.getElementById('step1').style.display = 'none';
             document.getElementById('step2').style.display = 'flex';
             currentStep = 2;
-            dialogueInterval = setInterval(changeDialogue, 1000);
         } else if (currentStep === 2) {
             document.getElementById('step2').style.display = 'none';
             document.getElementById('step3').style.display = 'flex';
             currentStep = 3;
-            clearInterval(dialogueInterval);
         } else if (currentStep === 3) {
             document.getElementById('step3').style.display = 'none';
             document.getElementById('step4').style.display = 'flex';
@@ -1669,8 +1740,6 @@
         document.getElementById('step4').style.display = 'none';
         currentStep = 1;
         clearInterval(dialogueInterval);
-        tanazIndex = 0;
-        shabitIndex = 0;
     }
 
     document.addEventListener('keydown', function(event) {
@@ -1678,6 +1747,13 @@
             if (currentStep < 4) {
                 nextStep();
             }
+        }
+        // Movement controls with arrow keys
+        if (currentStep === 4) {
+            if (event.key === 'ArrowUp') moveCharacter('up');
+            if (event.key === 'ArrowDown') moveCharacter('down');
+            if (event.key === 'ArrowLeft') moveCharacter('left');
+            if (event.key === 'ArrowRight') moveCharacter('right');
         }
     });
 
@@ -1692,31 +1768,20 @@
         }
     }
 
-    const originalNextStep = nextStep;
-    (function() {
-        const oldNextStep = nextStep;
-        nextStep = function() {
-            if (currentStep === 2) {
-                document.getElementById('step2').style.display = 'none';
-                document.getElementById('step3').style.display = 'flex';
-                currentStep = 3;
-                clearInterval(dialogueInterval);
-                createMoreConfetti();
-            } else {
-                oldNextStep();
-            }
-        };
-    })();
-
     // ===== BOSS GAME CODE SECTION =====
     let gameState = {
         tanazHP: 100,
         tanazMaxHP: 100,
-        tanzimHP: 200,
-        tanzimMaxHP: 200,
-        isDefending: false,
-        defenseBonus: 0,
-        gameActive: true
+        shabitHP: 150,
+        shabitMaxHP: 150,
+        tanzimHP: 800,
+        tanzimMaxHP: 800,
+        tanazDefending: false,
+        shabitDefending: false,
+        tanzimDefending: false,
+        gameActive: true,
+        tanazPosition: { x: 0, y: 0 },
+        shabitPosition: { x: 100, y: 0 }
     };
 
     const shabitVoiceLines = [
@@ -1727,17 +1792,24 @@
         "Nah you're not losing this.",
         "Let's go GO GO!",
         "Cover me!",
-        "I got your back!"
+        "I got your back!",
+        "Yo this demon tough!",
+        "We're a team! 💙"
     ];
 
     function updateHealthBars() {
         const tanazPercent = (gameState.tanazHP / gameState.tanazMaxHP) * 100;
         const tanzimPercent = (gameState.tanzimHP / gameState.tanzimMaxHP) * 100;
+        const shabitPercent = (gameState.shabitHP / gameState.shabitMaxHP) * 100;
 
-        document.getElementById('tanazHealthFill').style.width = tanazPercent + '%';
-        document.getElementById('tanazHealthText').textContent = gameState.tanazHP + '/' + gameState.tanazMaxHP;
-        document.getElementById('tanzimHealthFill').style.width = tanzimPercent + '%';
-        document.getElementById('tanzimHealthText').textContent = gameState.tanzimHP + '/' + gameState.tanzimMaxHP;
+        document.getElementById('tanazHealthFill').style.width = Math.max(0, tanazPercent) + '%';
+        document.getElementById('tanazHealthText').textContent = Math.max(0, gameState.tanazHP) + '/' + gameState.tanazMaxHP;
+        
+        document.getElementById('tanzimHealthFill').style.width = Math.max(0, tanzimPercent) + '%';
+        document.getElementById('tanzimHealthText').textContent = Math.max(0, gameState.tanzimHP) + '/' + gameState.tanzimMaxHP;
+        
+        document.getElementById('shabitHealthFill').style.width = Math.max(0, shabitPercent) + '%';
+        document.getElementById('shabitHealthText').textContent = Math.max(0, gameState.shabitHP) + '/' + gameState.shabitMaxHP;
     }
 
     function addLog(message, type = '') {
@@ -1758,18 +1830,48 @@
         }, 10);
     }
 
+    function moveCharacter(direction) {
+        if (!gameState.gameActive) return;
+
+        const sprite = document.getElementById('tanazSprite');
+        let animation = '';
+
+        switch(direction) {
+            case 'left':
+                gameState.tanazPosition.x = Math.max(-100, gameState.tanazPosition.x - 30);
+                animation = 'moveLeft 0.3s ease-in-out';
+                break;
+            case 'right':
+                gameState.tanazPosition.x = Math.min(100, gameState.tanazPosition.x + 30);
+                animation = 'moveRight 0.3s ease-in-out';
+                break;
+            case 'up':
+                gameState.tanazPosition.y = Math.max(-50, gameState.tanazPosition.y - 30);
+                animation = 'moveUp 0.3s ease-in-out';
+                break;
+            case 'down':
+                gameState.tanazPosition.y = Math.min(50, gameState.tanazPosition.y + 30);
+                animation = 'moveDown 0.3s ease-in-out';
+                break;
+        }
+
+        if (animation) {
+            sprite.style.transform = `translate(${gameState.tanazPosition.x}px, ${gameState.tanazPosition.y}px)`;
+        }
+    }
+
     function playerAttack() {
         if (!gameState.gameActive) return;
 
-        const damage = Math.floor(Math.random() * 30) + 15;
+        const damage = Math.floor(Math.random() * 30) + 20;
         gameState.tanzimHP = Math.max(0, gameState.tanzimHP - damage);
-        gameState.isDefending = false;
+        gameState.tanazDefending = false;
 
         const tanazSprite = document.getElementById('tanazSprite');
-        tanazSprite.style.animation = 'criticalHit 0.5s ease-out';
+        tanazSprite.classList.add('attacking');
         setTimeout(() => {
-            tanazSprite.style.animation = 'float 3s ease-in-out infinite';
-        }, 500);
+            tanazSprite.classList.remove('attacking');
+        }, 400);
 
         addLog(`💥 TANAZ Attacked! Dealt ${damage} damage!`, 'damage');
         showShabitDialogue(shabitVoiceLines[Math.floor(Math.random() * shabitVoiceLines.length)]);
@@ -1779,74 +1881,159 @@
         if (gameState.tanzimHP <= 0) {
             endGame(true);
         } else {
-            setTimeout(() => bossAttack(), 1000);
+            setTimeout(() => {
+                shabitAction();
+                bossAttack();
+            }, 800);
         }
     }
 
     function playerHeal() {
         if (!gameState.gameActive) return;
 
-        const healAmount = Math.floor(Math.random() * 25) + 20;
+        const healAmount = Math.floor(Math.random() * 25) + 15;
         gameState.tanazHP = Math.min(gameState.tanazMaxHP, gameState.tanazHP + healAmount);
-        gameState.isDefending = false;
+        gameState.tanazDefending = false;
+
+        const tanazSprite = document.getElementById('tanazSprite');
+        tanazSprite.classList.add('healing');
+        setTimeout(() => {
+            tanazSprite.classList.remove('healing');
+        }, 600);
 
         addLog(`💚 TANAZ used Heal! Recovered ${healAmount} HP!`, 'heal');
-        showShabitDialogue("Wait wait I'll heal—OK NOW GO GO");
+        showShabitDialogue("Let me help!");
 
         updateHealthBars();
-        setTimeout(() => bossAttack(), 1000);
+        setTimeout(() => {
+            shabitAction();
+            bossAttack();
+        }, 800);
     }
 
     function playerDefend() {
         if (!gameState.gameActive) return;
 
-        gameState.isDefending = true;
-        addLog(`🛡️ TANAZ is defending! Reduced damage incoming!`, 'heal');
-        showShabitDialogue("I got your back!");
+        gameState.tanazDefending = true;
 
-        setTimeout(() => bossAttack(), 1000);
+        const tanazSprite = document.getElementById('tanazSprite');
+        const shield = document.getElementById('tanazShield');
+        tanazSprite.classList.add('defending');
+        shield.classList.remove('hidden');
+
+        addLog(`🛡️ TANAZ is defending! Reduced damage incoming!`, 'heal');
+        showShabitDialogue("I'll cover you!");
+
+        setTimeout(() => {
+            tanazSprite.classList.remove('defending');
+            shabitAction();
+            bossAttack();
+        }, 800);
+    }
+
+    function shabitAction() {
+        const actions = ['attack', 'heal', 'defend'];
+        const action = actions[Math.floor(Math.random() * actions.length)];
+
+        if (gameState.shabitHP <= 0) return;
+
+        const shabitSprite = document.getElementById('shabitSprite');
+        const shabitShield = document.getElementById('shabitShield');
+
+        if (action === 'attack') {
+            const damage = Math.floor(Math.random() * 25) + 15;
+            gameState.tanzimHP = Math.max(0, gameState.tanzimHP - damage);
+            shabitSprite.classList.add('attacking');
+            setTimeout(() => {
+                shabitSprite.classList.remove('attacking');
+            }, 400);
+            addLog(`💙 SHABIT Attacked! Dealt ${damage} damage!`, 'damage');
+        } else if (action === 'heal') {
+            if (gameState.tanazHP <= 40) {
+                const healAmount = 30;
+                gameState.shabitHP = Math.max(0, gameState.shabitHP - 20);
+                gameState.tanazHP = Math.min(gameState.tanazMaxHP, gameState.tanazHP + healAmount);
+                
+                // Shabit saves Tanaz - come in front
+                shabitSprite.style.animation = 'slideIn 0.5s ease-out';
+                shabitSprite.classList.add('healing');
+                shabitShield.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    shabitShield.classList.add('hidden');
+                    shabitSprite.classList.remove('healing');
+                }, 600);
+                
+                addLog(`💙 SHABIT Saved TANAZ with Shield! Healed ${healAmount} HP!`, 'heal');
+                showShabitDialogue("Nah you're not losing this. 💙");
+            }
+        } else if (action === 'defend') {
+            gameState.shabitDefending = true;
+            shabitSprite.classList.add('defending');
+            shabitShield.classList.remove('hidden');
+            addLog(`🛡️ SHABIT is defending!`, 'heal');
+        }
+
+        updateHealthBars();
     }
 
     function bossAttack() {
-        if (!gameState.gameActive) return;
+        if (!gameState.gameActive || gameState.tanzimHP <= 0) return;
 
-        let damage = Math.floor(Math.random() * 25) + 10;
+        // Boss can defend sometimes
+        const willDefend = Math.random() < 0.2;
         
-        if (gameState.isDefending) {
-            damage = Math.floor(damage / 2);
-            addLog(`🛡️ Defense Reduced Damage! Tanzim dealt ${damage} damage!`, 'damage');
-            gameState.isDefending = false;
-        } else {
-            addLog(`⚡ TANZIM Attacked! Dealt ${damage} damage!`, 'damage');
+        if (willDefend) {
+            gameState.tanzimDefending = true;
+            const demonBoss = document.getElementById('demoBoss');
+            const demonShield = document.getElementById('demonShield');
+            demonBoss.classList.add('defending');
+            demonShield.classList.remove('hidden');
+            
+            addLog(`🛡️ TANZIM is defending!`, 'heal');
+            
+            setTimeout(() => {
+                demonBoss.classList.remove('defending');
+                demonShield.classList.add('hidden');
+                gameState.tanzimDefending = false;
+            }, 800);
+            return;
         }
 
-        gameState.tanazHP = Math.max(0, gameState.tanazHP - damage);
+        let damageToTanaz = Math.floor(Math.random() * 20) + 15;
+        let damageToShabit = Math.floor(Math.random() * 15) + 8;
 
-        const tanzimSprite = document.getElementById('tanzimSprite');
-        tanzimSprite.style.animation = 'shake 0.4s ease-in-out';
+        if (gameState.tanazDefending) {
+            damageToTanaz = Math.floor(damageToTanaz / 2);
+            gameState.tanazDefending = false;
+            document.getElementById('tanazShield').classList.add('hidden');
+        }
+
+        if (gameState.shabitDefending) {
+            damageToShabit = Math.floor(damageToShabit / 2);
+            gameState.shabitDefending = false;
+            document.getElementById('shabitShield').classList.add('hidden');
+        }
+
+        gameState.tanazHP = Math.max(0, gameState.tanazHP - damageToTanaz);
+        gameState.shabitHP = Math.max(0, gameState.shabitHP - damageToShabit);
+
+        const demoBoss = document.getElementById('demoBoss');
+        demoBoss.classList.add('damaged');
         setTimeout(() => {
-            tanzimSprite.style.animation = 'none';
+            demoBoss.classList.remove('damaged');
         }, 400);
 
-        const tanazSprite = document.getElementById('tanazSprite');
-        tanazSprite.classList.add('damaged');
+        document.getElementById('tanazSprite').classList.add('damaged');
         setTimeout(() => {
-            tanazSprite.classList.remove('damaged');
+            document.getElementById('tanazSprite').classList.remove('damaged');
         }, 500);
+
+        addLog(`⚡ TANZIM Attacked! Tanaz took ${damageToTanaz} damage, Shabit took ${damageToShabit} damage!`, 'damage');
 
         updateHealthBars();
 
-        // Support Mode: Shabit helps when HP is low
-        if (gameState.tanazHP <= 30 && gameState.tanazHP > 0) {
-            setTimeout(() => {
-                showShabitDialogue("Nah you're not losing this. 💙");
-                gameState.tanazHP += 15;
-                addLog("💙 SHABIT healed TANAZ! +15 HP", 'heal');
-                updateHealthBars();
-            }, 500);
-        }
-
-        if (gameState.tanazHP <= 0) {
+        if (gameState.tanazHP <= 0 || gameState.shabitHP <= 0) {
             endGame(false);
         }
     }
@@ -1871,17 +2058,26 @@
         gameState = {
             tanazHP: 100,
             tanazMaxHP: 100,
-            tanzimHP: 200,
-            tanzimMaxHP: 200,
-            isDefending: false,
-            defenseBonus: 0,
-            gameActive: true
+            shabitHP: 150,
+            shabitMaxHP: 150,
+            tanzimHP: 800,
+            tanzimMaxHP: 800,
+            tanazDefending: false,
+            shabitDefending: false,
+            tanzimDefending: false,
+            gameActive: true,
+            tanazPosition: { x: 0, y: 0 },
+            shabitPosition: { x: 100, y: 0 }
         };
 
         document.getElementById('gameLog').innerHTML = '<div class="log-entry">🎮 Battle Start! Defeat Tanzim to save the day!</div>';
         document.getElementById('victoryScreen').classList.remove('show');
+        document.getElementById('tanazShield').classList.add('hidden');
+        document.getElementById('shabitShield').classList.add('hidden');
+        document.getElementById('demonShield').classList.add('hidden');
+        
         updateHealthBars();
-        showShabitDialogue("Let's go! We got this! 🔥");
+        showShabitDialogue("Let's do this! 🔥");
     }
 
     function restartGame() {
